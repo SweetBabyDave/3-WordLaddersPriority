@@ -22,13 +22,33 @@ public class AVLTree<E extends Comparable<? super E>> {
         root = insert(value, root);
     }
 
-    public E deleteMin() {
-        // TODO: Write some good stuff here
+    public AvlNode deleteMinFinder(AvlNode node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
 
-        // Note: I only put this code here to have it compile.
-        // This will NOT work if root is null.  You should return
-        // the actual min value found.
-        return root.value;
+    public E deleteMin() {
+        AvlNode minNode = deleteMinFinder(this.root);
+        AvlNode parent = null;
+        AvlNode curr = this.root;
+        while (curr != minNode) {
+            parent = curr;
+            curr = curr.left;
+        }
+        // Case 1: Root Node
+        if (curr == this.root) {
+            this.root = this.root.right;
+        // Case 2: One Child
+        } else if (curr.right != null) {
+            parent.left = curr.right;
+        // Case 3: Leaf Node
+        } else {
+            parent.left = null;
+        }
+        return minNode.value;
+
     }
 
     /**
@@ -73,8 +93,19 @@ public class AVLTree<E extends Comparable<? super E>> {
     /**
      * Print the tree contents in sorted order.
      */
+    public void printTreeHelper(AvlNode node, StringBuilder sb, int counter) {
+        if (node == null) return;
+        counter++;
+        String tab = new String(new char[counter]).replace("\0", "  ");
+        printTreeHelper(node.right, sb, counter);
+        sb.append(tab).append(node.value).append("(" + node.height + ")").append("\n");
+        printTreeHelper(node.left, sb, counter);
+    }
     public void printTree(String label) {
-        // TODO: Write some good stuff here
+        StringBuilder sb = new StringBuilder();
+        sb.append(label).append("\n");
+        printTreeHelper(this.root, sb, -1);
+        System.out.println(sb);
     }
 
     private static final int ALLOWED_IMBALANCE = 1;
