@@ -7,7 +7,6 @@ public class LadderGameExhaustive extends LadderGame {
     private ArrayList<ArrayList<String>> dictionary = new ArrayList<ArrayList<String>>();
 
     public LadderGameExhaustive(String dictionaryFile) {
-        super();
         readDictionary(dictionaryFile);
     }
     public void play(String start, String end) {
@@ -28,7 +27,7 @@ public class LadderGameExhaustive extends LadderGame {
                     ladder = new WordInfo(word, curLadder.getMoves() + 1, curLadder.getHistory() + " " + word);
                     if(word.equals(end)) {
                         solutionFound = true;
-                        System.out.println(start + " -> " + end + " : " + ladder.getMoves() + " Moves [" + ladder.getHistory() + "] " + enqueueCounter + " total enqueues" );
+                        System.out.println("Seeking exhaustive solution from " + start + " -> " + end + "\n [" + ladder.getHistory() + "] " + enqueueCounter + " total enqueues");
                         break;
                     } else {
                         partialSolution.enqueue(ladder);

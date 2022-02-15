@@ -7,7 +7,6 @@ public class LadderGamePriority extends LadderGame {
     private ArrayList<ArrayList<String>> dictionary = new ArrayList<ArrayList<String>>();
 
     public LadderGamePriority(String dictionaryFile) {
-        super();
         readDictionary(dictionaryFile);
     }
     public void play(String start, String end) {
@@ -15,20 +14,20 @@ public class LadderGamePriority extends LadderGame {
         int enqueueCounter = 0;
         if (start.length() == end.length() && dictionary.get(start.length() - 1).contains(start) && dictionary.get(end.length() - 1).contains(end)) {
 
-            WordInfo ladder = new WordInfo(start, enqueueCounter);
+            WordInfoPriority ladder = new WordInfoPriority(start, enqueueCounter);
             boolean solutionFound = false;
-            Queue<WordInfo> partialSolution = new Queue<>();
+            Queue<WordInfoPriority> partialSolution = new Queue<>();
             partialSolution.enqueue(ladder);
             enqueueCounter++;
 
             while (!partialSolution.isEmpty() && !solutionFound) {
-                WordInfo curLadder = partialSolution.dequeue();
+                WordInfoPriority curLadder = partialSolution.dequeue();
                 ArrayList<String> oneAways = this.oneAway(curLadder.getWord(), true);
                 for(String word : oneAways) {
-                    ladder = new WordInfo(word, curLadder.getMoves() + 1, curLadder.getHistory() + " " + word);
+                    ladder = new WordInfoPriority(word, curLadder.getMoves() + 1, curLadder.getHistory() + " " + word);
                     if(word.equals(end)) {
                         solutionFound = true;
-                        System.out.println(start + " -> " + end + " : " + ladder.getMoves() + " Moves [" + ladder.getHistory() + "] " + enqueueCounter + " total enqueues" );
+                        System.out.println("Seeking A* solution from " + start + " -> " + end + "\n [" + ladder.getHistory() + "] " + enqueueCounter + " total enqueues");
                         break;
                     } else {
                         partialSolution.enqueue(ladder);
