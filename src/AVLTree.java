@@ -46,17 +46,43 @@ public class AVLTree<E extends Comparable<? super E>> {
         // Case 1: Root Node
         if (curr == this.root) {
             this.root = this.root.right;
-        // Case 2: One Child
+            // Case 2: One Child
         } else if (curr.right != null) {
             parent.left = curr.right;
-        // Case 3: Leaf Node
+            // Case 3: Leaf Node
         } else {
             parent.left = null;
         }
-        deleteMinBalance(this.root);
+        deleteMinBalance(minNode);
         return minNode.value;
-
     }
+
+//    private AvlNode deleteMinHelper(AvlNode node, AvlNode parent, AvlNode minNode) {
+//        if (node.left == null) {
+//            // Case 1: Root Node
+//            if (node == this.root) {
+//                this.root = this.root.right;
+//                // Case 2: One Child
+//            } else if (node.right != null) {
+//                parent.left = node.right;
+//                // Case 3: Leaf Node
+//            } else {
+//                parent.left = null;
+//            }
+//            balance(node);
+//            minNode = node;
+//            return minNode;
+//        }
+//        minNode = deleteMinHelper(node.left, node, minNode);
+//        balance(node);
+//        return minNode;
+//    }
+//
+//    public E deleteMin() {
+//        AvlNode minNode = deleteMinHelper(this.root, null, null);
+//        return minNode.value;
+//
+//    }
 
     /**
      * Find the largest item in the tree.
@@ -100,7 +126,7 @@ public class AVLTree<E extends Comparable<? super E>> {
     /**
      * Print the tree contents in sorted order.
      */
-    public void printTreeHelper(AvlNode node, StringBuilder sb, int counter) {
+    private void printTreeHelper(AvlNode node, StringBuilder sb, int counter) {
         if (node == null) return;
         counter++;
         String tab = new String(new char[counter]).replace("\0", "  ");

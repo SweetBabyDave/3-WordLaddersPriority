@@ -23,21 +23,21 @@ public class WordLadders {
         gameExhaustive.play("jura", "such");
         gamePriority.play("jura", "such");
         System.out.println();
-
-        gameExhaustive.play("stet", "whey");
-        gamePriority.play("stet", "whey");
-        System.out.println();
-
-        gameExhaustive.play("butter", "plates");
-        gamePriority.play("butter", "plates");
-        System.out.println();
-
-        gameExhaustive.play("crafted", "mommies");
-        gamePriority.play("crafted", "mommies");
-        System.out.println();
-
-        gameExhaustive.play("stone", "money");
-        gamePriority.play("stone", "money");
+//
+//        gameExhaustive.play("stet", "whey");
+//        gamePriority.play("stet", "whey");
+//        System.out.println();
+//
+//        gameExhaustive.play("butter", "plates");
+//        gamePriority.play("butter", "plates");
+//        System.out.println();
+//
+//        gameExhaustive.play("crafted", "mommies");
+//        gamePriority.play("crafted", "mommies");
+//        System.out.println();
+//
+//        gameExhaustive.play("stone", "money");
+//        gamePriority.play("stone", "money");
     }
 
     public static void testAvlTree() {
