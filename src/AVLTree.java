@@ -22,6 +22,12 @@ public class AVLTree<E extends Comparable<? super E>> {
         root = insert(value, root);
     }
 
+    public void deleteMinBalance(AvlNode node) {
+        if (node == null) return;
+        deleteMinBalance(node.left);
+        balance(node);
+    }
+
     public AvlNode deleteMinFinder(AvlNode node) {
         while (node.left != null) {
             node = node.left;
@@ -47,6 +53,7 @@ public class AVLTree<E extends Comparable<? super E>> {
         } else {
             parent.left = null;
         }
+        deleteMinBalance(this.root);
         return minNode.value;
 
     }
